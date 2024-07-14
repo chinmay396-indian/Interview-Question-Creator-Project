@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GenAI PDF Question Generator</title>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Roboto', sans-serif;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+            background-color: #f4f4f9;
+            color: #333;
+        }
+
+        header {
+            background-color: #4CAF50;
+            color: white;
+            text-align: center;
+            padding: 2em 1em;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        header h1 {
+            margin: 0;
+            font-weight: 300;
+        }
+
+        header p {
+            margin: 0.5em 0 0;
+            font-weight: 400;
+        }
+
+        main {
+            flex: 1;
+            padding: 2em;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .upload-section, .generate-section, .output-section {
+            width: 100%;
+            max-width: 600px;
+            margin-bottom: 2em;
+            text-align: center;
+        }
+
+        .upload-btn {
+            display: inline-block;
+            padding: 0.75em 1.5em;
+            background-color: #008CBA;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 1em;
+            margin-right: 1em;
+            transition: background-color 0.3s ease;
+        }
+
+        .upload-btn:hover {
+            background-color: #007B9E;
+        }
+
+        #file-name {
+            font-style: italic;
+            color: #555;
+        }
+
+        #generate-btn {
+            padding: 0.75em 1.5em;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 1em;
+            transition: background-color 0.3s ease;
+        }
+
+        #generate-btn:hover {
+            background-color: #45A049;
+        }
+
+        .output-section h2 {
+            font-weight: 400;
+            margin-bottom: 1em;
+        }
+
+        #questions-list {
+            list-style-type: none;
+            padding: 0;
+        }
+
+        #questions-list li {
+            background-color: #fff;
+            padding: 1em;
+            margin-bottom: 0.5em;
+            border-radius: 5px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            transition: transform 0.2s ease;
+        }
+
+        #questions-list li:hover {
+            transform: translateY(-2px);
+        }
+
+        footer {
+            background-color: #333;
+            color: white;
+            text-align: center;
+            padding: 1em 0;
+            box-shadow: 0 -2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        footer p {
+            margin: 0;
+            font-size: 0.9em;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>GenAI PDF Question Generator</h1>
+        <p>Upload your PDF file to generate a list of questions.</p>
+    </header>
+    <main>
+        <section class="upload-section">
+            <input type="file" id="pdf-upload" accept="application/pdf" hidden>
+            <label for="pdf-upload" class="upload-btn">Choose PDF</label>
+            <span id="file-name">No file chosen</span>
+        </section>
+        <section class="generate-section">
+            <button id="generate-btn">Generate Questions</button>
+        </section>
+        <section class="output-section">
+            <h2>Generated Questions</h2>
+            <ul id="questions-list"></ul>
+        </section>
+    </main>
+    <footer>
+        <p>&copy; 2024 GenAI. All rights reserved.</p>
+    </footer>
+    <script>
+        document.getElementById('pdf-upload').addEventListener('change', function() {
+            const fileName = this.files[0] ? this.files[0].name : 'No file chosen';
+            document.getElementById('file-name').textContent = fileName;
+        });
+
+        document.getElementById('generate-btn').addEventListener('click', function() {
+            const fileInput = document.getElementById('pdf-upload');
+            if (fileInput.files.length === 0) {
+                alert('Please choose a PDF file.');
+                return;
+            }
+
+            const file = fileInput.files[0];
+            // Handle file upload and question generation
+            // This part needs to interact with your backend to process the file and get the questions
+
+            // Mocking the response for demonstration
+            const questions = [
+                'What is the main theme of the document?',
+                'List the key points discussed in the second chapter.',
+                'Summarize the conclusions made in the final section.'
+            ];
+
+            const questionsList = document.getElementById('questions-list');
+            questionsList.innerHTML = ''; // Clear previous questions
+            questions.forEach(question => {
+                const li = document.createElement('li');
+                li.textContent = question;
+                questionsList.appendChild(li);
+            });
+        });
+    </script>
+</body>
+</html>
